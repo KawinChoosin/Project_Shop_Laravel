@@ -80,6 +80,15 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->decimal('CA_price', 65, 30);
             $table->timestamps();
         });
+
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+        });
         
     }
 
@@ -92,6 +101,6 @@ class CreateProductsAndCategoriesTables extends Migration
         Schema::dropIfExists('order_details');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('cart_details');
-        
+        Schema::dropIfExists('sessions');
     }
 }

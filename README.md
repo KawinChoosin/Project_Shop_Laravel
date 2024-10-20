@@ -1,4 +1,4 @@
-<h1>Step<h1>
+<h2>Step<h2>
 <h4>"./vendor/bin/sail npm i"<h4>
 <h4>"./vendor/bin/sail up"<h4>
 <h4>"./vendor/bin/sail artisan migrate"<h4>

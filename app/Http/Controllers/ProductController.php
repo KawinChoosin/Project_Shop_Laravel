@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Cart;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -53,6 +55,17 @@ class ProductController extends Controller
         return view('home', compact('products', 'categoryName'));
     }
 
-    
-    
+    public function show($id, Request $request)
+    {
+        // Fetch product details
+        $product = Product::find($id);
+        
+        $customerId = $request->user()->id ?? 1; // Example customer_id
+
+        return view('PDetail', [
+            'product' => $product,
+            'customerId' => $customerId
+        ]);
+    }
+
 }

@@ -9,7 +9,7 @@
                     <!-- Flexbox layout for card -->
                     <div style="background-color: none; border-radius: 8px;  solid #e0e0e0; padding: 16px; display: flex; flex-direction: column; height: 100%;">
                         <div style="background-color: white; border-radius: 8px; border: 1px solid #e0e0e0; padding: 16px; display: flex; flex-direction: column; height: 80%;">
-                            <a href="#">
+                            <a href="{{ $product->P_id }}">
                                 <img src="{{ $product->P_img }}" alt="{{ $product->P_name }}" style="width: 100%; height: 300px; object-fit: scale-down; border-radius: 8px; margin-bottom: 16px;">
                             </a>
                         </div>
