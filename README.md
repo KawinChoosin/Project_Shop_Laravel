@@ -1,6 +1,8 @@
 <h1>Step<h1>
-<h4>1.npm i<h4>
-<h4>2."./vendor/bin/sail up"<h4>
-<h4>3.""npm run dev" for run tailwind css "<h4>
-<h4>Try class flex not work just use only style<h4>
-
+<h4>"./vendor/bin/sail npm i"<h4>
+<h4>"./vendor/bin/sail up"<h4>
+<h4>"./vendor/bin/sail artisan migrate"<h4>
+<h4>"./vendor/bin/sail artisan db:seed --class=CustomerSeeder"<h4>
+<h4>"./vendor/bin/sail artisan db:seed --class=CategorySeeder"<h4>
+<h4>"./vendor/bin/sail artisan db:seed --class=CartSeeder"<h4>
+<h4>"./vendor/bin/sail npm run dev"<h4>
