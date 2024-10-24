@@ -20,7 +20,7 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->integer('P_quantity');
             $table->integer('P_price');
             $table->string('P_img', 1000)->nullable();
-            $table->foreignId('CG_id')->constrained('categories', 'CG_id')->onDelete('cascade');;
+            $table->foreignId('CG_id')->constrained('categories', 'CG_id')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -29,7 +29,19 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->string('C_name', 255);
             $table->string('C_password', 255);
             $table->string('C_email', 255)->unique();
-            $table->string('C_Address', 255)->nullable();
+            $table->timestamps();
+        });
+        
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->id('A_id');
+            $table->foreignId('C_id')->constrained('customers', 'C_id')->onDelete('cascade');
+            $table->string('address', 255);
+            $table->string('street_name_house_no', 255);
+            $table->string('building', 255)->nullable();
+            $table->string('postal_code', 10);
+            $table->string('subdistrict', 255);
+            $table->string('district', 255);
+            $table->string('province', 255);
             $table->timestamps();
         });
 
@@ -37,6 +49,9 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->id('O_id');
             $table->foreignId('C_id')
                 ->constrained('customers', 'C_id')
+                ->onDelete('cascade');
+            $table->foreignId('A_id')
+                ->constrained('addresses', 'A_id')
                 ->onDelete('cascade');
             $table->timestamp('Q_Date_time', 3);
             $table->decimal('O_Total', 65, 30);
@@ -80,7 +95,6 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->decimal('CA_price', 65, 30);
             $table->timestamps();
         });
-        
     }
 
     public function down()
@@ -88,10 +102,10 @@ class CreateProductsAndCategoriesTables extends Migration
         Schema::dropIfExists('products');
         Schema::dropIfExists('categories');
         Schema::dropIfExists('customers');
+        Schema::dropIfExists('addresses');
         Schema::dropIfExists('orders');
         Schema::dropIfExists('order_details');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('cart_details');
-        
     }
 }
