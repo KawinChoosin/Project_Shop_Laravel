@@ -1,11 +1,13 @@
-<header class="bg-white"> 
+<header class=" bg-red-400"> 
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 h-[100px]" aria-label="Global">
     
     <!-- Left section with company logo -->
     <div class="flex lg:flex-1">
       <a href="{{ url('/') }}" class="-m-1.5 p-1.5">
         <span class="sr-only">Your Company</span>
-        <img class="h-20 w-auto" src="https://st3.depositphotos.com/4177785/35869/v/450/depositphotos_358692326-stock-illustration-convenience-store-rgb-color-icon.jpg" alt="Your Company Logo">
+        <img src="{{ asset('images/head.png') }}" alt="Head Icon"  class="h-20 w-auto"">
+
+
       </a>
     </div>
 
@@ -28,23 +30,6 @@
             </svg>
       </a>
 
-      <!-- Favorite Icon -->
-      <a href="{{ url('/favorites') }}" class="text-gray-700 hover:text-gray-900 mt-1">
-        <span class="sr-only">Favorites</span>
-        <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22px"
-              height="22px"
-              fill="#000000"
-              className="bi bi-heart"
-              viewBox="0 0 16 16"
-            >
-              <title>Favorite</title>
-              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-            </svg>
-      </a>
-
-      
       <!-- User Icon -->
       <a href="{{ url('/profile') }}" class="text-gray-700 hover:text-gray-900">
         <span class="sr-only">User Profile</span>

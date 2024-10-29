@@ -7,6 +7,18 @@ class CreateProductsAndCategoriesTables extends Migration
 {
     public function up()
     {
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->id('A_id');
+           
+            $table->string('A_address_line1', 255);
+            $table->string('A_city', 100);
+            $table->string('A_state', 100);
+            $table->string('A_postal_code', 20);
+            $table->string('A_country', 100);
+            $table->boolean('A_is_default')->default(false); // Default address flag
+            $table->timestamps();
+        });
+
         Schema::create('categories', function (Blueprint $table) {
             $table->id('CG_id');
             $table->string('CG_name', 255);
@@ -29,7 +41,7 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->string('C_name', 255);
             $table->string('C_password', 255);
             $table->string('C_email', 255)->unique();
-            $table->string('C_Address', 255)->nullable();
+            $table->foreignId('A_id')->nullable()->constrained('addresses', 'A_id')->onDelete('set null'); // Set the foreign key to A_id
             $table->timestamps();
         });
 
@@ -38,8 +50,9 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->foreignId('C_id')
                 ->constrained('customers', 'C_id')
                 ->onDelete('cascade');
-            $table->timestamp('Q_Date_time', 3);
+            $table->timestamp('O_Date_time', 3);
             $table->decimal('O_Total', 65, 30);
+            $table->string('O_Address', 255)->nullable();
             $table->text('O_Description')->nullable();
             $table->timestamps();
         });
@@ -92,6 +105,7 @@ class CreateProductsAndCategoriesTables extends Migration
         Schema::dropIfExists('order_details');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('cart_details');
+        Schema::dropIfExists('addresses');
         
     }
 }
