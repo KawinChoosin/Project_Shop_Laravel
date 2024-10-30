@@ -7,7 +7,11 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+<<<<<<< HEAD
  */
+=======
+ */                                        
+>>>>>>> 4d67a8d (Login and register done)
 
 namespace Symfony\Component\Mailer\Transport\Smtp\Auth;
 
