@@ -50,11 +50,7 @@ class RedirectIfAuthenticated
      */
     protected function defaultRedirectUri(): string
     {
-<<<<<<< HEAD
-        foreach (['dashboard', 'home'] as $uri) {
-=======
         foreach (['home'] as $uri) {
->>>>>>> 4d67a8d (Login and register done)
             if (Route::has($uri)) {
                 return route($uri);
             }
@@ -62,11 +58,7 @@ class RedirectIfAuthenticated
 
         $routes = Route::getRoutes()->get('GET');
 
-<<<<<<< HEAD
-        foreach (['dashboard', 'home'] as $uri) {
-=======
         foreach (['home'] as $uri) {
->>>>>>> 4d67a8d (Login and register done)
             if (isset($routes[$uri])) {
                 return '/'.$uri;
             }
