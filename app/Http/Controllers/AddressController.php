@@ -51,10 +51,10 @@ class AddressController extends Controller
             
     // Total cart value
     $total = $subTotal + $totalDeliveryCharge;
-                
-    
+    $couponValue = 0;             
+    $hasCouponApplied = false;
     // Pass addresses to the checkout view
-    return view('pages.checkout', compact('addresses', 'subTotal', 'totalDeliveryCharge', 'total'));
+    return view('pages.checkout', compact('addresses', 'subTotal', 'totalDeliveryCharge', 'total','couponValue','hasCouponApplied'));
 }
 
 

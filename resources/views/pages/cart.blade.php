@@ -108,19 +108,12 @@
 
             <!-- Checkout Buttons -->
             <div class="flex items-center flex-col sm:flex-row justify-center gap-3 mt-8">
-                <button class="rounded-full py-4 w-full max-w-[280px] flex items-center bg-indigo-50 justify-center transition-all duration-500 hover:bg-indigo-100">
-                    <span class="px-2 font-semibold text-lg leading-8 text-indigo-600">Add Coupon Code</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                        <path d="M8.25324 5.49609L13.7535 10.9963L8.25 16.4998" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <a href="{{ url('/checkout') }}" class="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700">
+                <a id="checkout-btn" href="#" class="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700">
                     Continue to Payment
                     <svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
                         <path d="M8.75324 5.49609L14.2535 10.9963L8.75 16.4998" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-
             </div>
         </div>
         <!-- Delete Confirmation Modal -->
@@ -135,6 +128,36 @@
                 </div>
             </div>
         </div>
+
+        <div id="empty-cart-modal" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+              <h3 class="text-base font-semibold text-gray-900" id="modal-title">Empty Cart</h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">Your cart is empty. Please shop for more items.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button id="close-modal" type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Close</button>
+          <button id="go-home" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Go to Shop</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
     </section>
 
@@ -306,6 +329,33 @@ document.getElementById('confirm-delete-btn').addEventListener('click', confirmD
 
 
 
+
+</script>
+
+<script>
+document.getElementById('checkout-btn').addEventListener('click', function(event) {
+    // Prevent the default link behavior
+    event.preventDefault();
+
+    // Check if cart items exist
+    if ({{ count($cartItems) }} === 0) {
+        // Show the modal if the cart is empty
+        document.getElementById('empty-cart-modal').classList.remove('hidden');
+    } else {
+        // Proceed to payment if cart is not empty
+        window.location.href = '{{ url('/checkout') }}';
+    }
+});
+
+// Close modal when close button is clicked
+document.getElementById('close-modal').addEventListener('click', function() {
+    document.getElementById('empty-cart-modal').classList.add('hidden');
+});
+
+// Go to shop when the button is clicked
+document.getElementById('go-home').addEventListener('click', function() {
+    window.location.href = '/'; // Change this to your shop URL
+});
 
 </script>
 

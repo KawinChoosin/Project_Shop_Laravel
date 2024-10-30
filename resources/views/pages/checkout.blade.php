@@ -10,45 +10,50 @@
 @include('components.nav')
 <section class="bg-white py-8 antialiased md:py-16">
   <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-    <!-- <ol class="items-center flex w-full max-w text-center text-sm font-medium text-gray-500 sm:text-base"> -->
-      <!-- <li class="after:border-1 flex items-center text-primary-700 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
-        <span class="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
+    <ol class="items-center flex w-full max-w text-center text-sm font-medium text-gray-500 sm:text-base">
+       <li class="after:border-1 flex items-center text-primary-700 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
+        <a href="{{ url('/cart') }}" >
+          <span class="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
           <svg class="me-2 h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
           Cart
         </span>
-      </li> -->
+      </a>
+      </li>
+      
+      
 
-      <!-- <li class="after:border-1 flex items-center text-primary-700 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
+      <li class="after:border-1 flex items-center text-green-600 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
         <span class="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
-          <svg class="me-2 h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <svg class="me-2 h-4 w-4 sm:h-5 sm:w-5 text-green-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
           Checkout
         </span>
-      </li> -->
+      </li>
 
-      <!-- <li class="flex shrink-0 items-center">
+
+      <li class="flex shrink-0 items-center">
         <svg class="me-2 h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
         Order summary
-      </li> -->
-    <!-- </ol> -->
-
+      </li>
+    </ol>
+   
     <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
   <div class="min-w-0 flex-1 space-y-8">
     <div class="space-y-4">
-      <h2 class="text-xl font-semibold text-gray-900">Delivery Details</h2>
+      <h2 class="text-xl font-semibold text-gray-900 " >Delivery Details</h2>
      
-        <label for="addresses" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Address</label>
-        <h3 class="mb-4 block text-base font-semibold text-gray-900">Please select address</h3>
-        <select id="addresses" name="address_id" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500">
-            <option selected>Select an address</option>
+      
+        <h3 class="mb-4 block text-base font-semibold text-gray-900  ">Please select address</h3>
+        <select id="addresses" name="address_id" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" onchange="updateAddressId()">
+            <option selected disabled>Select an address</option>
             @foreach($addresses as $address)
                 <option value="{{ $address->id }}">
-                {{ $address->A_name }},{{ $address->A_address_line1 }},{{ $address->A_address_line1 }}, {{ $address->A_city }}, {{ $address->A_country }},{{ $address->A_phone_number }}
+                    {{ $address->A_name }}, {{ $address->A_address_line1 }}, {{ $address->A_city }}, {{ $address->A_country }}, {{ $address->A_phone_number }}
                 </option>
             @endforeach
         </select>
@@ -106,9 +111,6 @@
         </div>
     </div>
 </form>
-
-
-
         </div>
 
         <div class="space-y-4">
@@ -121,7 +123,7 @@
               </div>
 
               <div class="ms-4 text-sm">
-                <label for="express" class="font-medium leading-none text-gray-900"> $50 - Express Delivery </label>
+                <label for="express" class="font-medium leading-none text-gray-900"> $50 - Express Delivery (Cash on delivery) </label>
                 <p id="express-text" class="mt-1 text-xs font-normal text-gray-500">Get it in 2-3 days</p>
               </div>
             </div>
@@ -139,21 +141,24 @@
                     </button>
                 </div>
             </form>
+                    @if($couponValue==0 && $hasCouponApplied == true)
+                        <div class=" text-sm font-medium text-red-400 mt-2 ml-2">
+                            invalid coupon code
+                        </div>
+                    @elseif($couponValue>=0 && $hasCouponApplied == true)
+                        <div class=" text-sm font-medium text-green-400 mt-2 ml-2">
+                            coupon code successfully add
+                        </div>
+                    @endif
         </div>
 
-        @if($errors->any())
-            <div class="text-red-500 mt-2">
-                {{ $errors->first('voucher') }}
-            </div>
-        @endif
 
-        @if(session('success'))
-            <div class="text-green-500 mt-2">
-                {{ session('success') }}
-            </div>
-        @endif
+
+       
+
+        
       </div>
-
+     
       <div class="mt-10 flex-1 rounded-lg border border-gray-200 bg-gray-50 p-4 shadow sm:p-8 lg:mt-0 lg:p-6 xl:p-8">
         <h3 class="text-xl font-semibold text-gray-900">Order Summary</h3>
         <ul class="divide-y divide-gray-200">
@@ -165,17 +170,58 @@
             <p class="text-sm font-medium text-gray-900">Shipping</p>
             <p class="text-sm font-medium text-gray-900">${{ $totalDeliveryCharge }}</p>
           </li>
+          @if($couponValue > 0)
+          <li class="flex items-center justify-between py-4">
+            <p  class="text-sm font-medium text-gray-400">Coupon Applied {{$couponValue}}% </>
+            <p class="text-sm font-medium text-gray-400">-${{$couponValue/100 * $subTotal  }}</p>
+          </li>
+          @endif
+          
           <li class="flex items-center justify-between py-4">
             <p class="text-sm font-medium text-gray-900">Total</p>
             <p class="text-sm font-medium text-gray-900">${{ $total }}</p>
+            
           </li>
+      
         </ul>
-        <button type="submit" class="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-lime-500 px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-primary-100 focus:outline-none focus:ring-4 focus:ring-primary-300">
+        <form action="{{ route('checkout.place_order') }}" method="POST" class="below-form">
+        @csrf
+        <input type="hidden" name="address_id" id="selectedAddressId">
+        <input type="hidden" name="subTotal" value="{{ $total }}">
+
+        <button type="submit" class="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 font-semibold text-lg text-white hover:bg-primary-100 focus:outline-none focus:ring-4 focus:ring-primary-300">
           Place Order
         </button>
+        </form>
       </div>
     </div>
   </div>
 </section>
+<script>
+        // Add an event listener to the select element
+        document.getElementById('addresses').addEventListener('change', updateAddressId);
+
+        function updateAddressId() {
+            // Get the selected value from the dropdown
+            const selectElement = document.getElementById('addresses');
+            const selectedAddressId = selectElement.value; // Get the selected address ID
+
+            // Update the hidden input with the selected address ID
+           
+
+            // Display the selected address ID and text for debugging
+            const selectedAddressText = selectElement.options[selectElement.selectedIndex].text;
+            document.getElementById('selectedAddressId').value = selectedAddressText;
+            document.getElementById('selectedAddressDisplay').innerText = 
+                "Selected Address ID: " + selectedAddressId + "\n" +
+                "Selected Address Text: " + selectedAddressText;
+
+            // Log to console to check if the function is working as expected
+            console.log("Function `updateAddressId` called.");
+            console.log("Selected Address ID:", selectedAddressId);
+            console.log("Selected Address Text:", selectedAddressText);
+        }
+    </script>
+
 </body>
 </html>
