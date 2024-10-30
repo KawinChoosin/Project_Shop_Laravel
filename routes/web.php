@@ -5,26 +5,15 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AddressController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiaryEntryController;
->>>>>>> 4d67a8d (Login and register done)
 
 // Home route
 Route::get('/', function () {
     return view('home'); 
 })->name('home');
 
-<<<<<<< HEAD
-// About route
-Route::get('/profile', function () {
-    return view('pages.profile'); 
-})->name('profile');
-
-=======
->>>>>>> 4d67a8d (Login and register done)
 // Services route
 Route::get('/favorites', function () {
     return view('pages.fav'); 
@@ -58,8 +47,6 @@ Route::get('/ordersummary', function () {
 
     Route::get('/order-summary', [CheckoutController::class, 'orderSummary'])->name('order.summary');
     Route::get('/order/summary/{orderId}', [CheckoutController::class, 'orderSummary'])->name('order.summary');
-<<<<<<< HEAD
-=======
 
     Route::get('/profile', function () {
         return view('pages.profile');
@@ -82,4 +69,3 @@ Route::get('/ordersummary', function () {
     Route::post('/profile-photo', [UserController::class, 'updateProfilePhoto'])->name('profile-photo.update');
     
     require __DIR__ . '/auth.php';
->>>>>>> 4d67a8d (Login and register done)
