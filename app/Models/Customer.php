@@ -10,7 +10,7 @@ class Customer extends Authenticatable
     use HasFactory;
     
     protected $table = 'customers';
-    protected $primaryKey = 'C_id';
+  
 
 
     protected $fillable = ['name', 'password', 'email'];

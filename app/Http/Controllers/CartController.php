@@ -16,7 +16,7 @@ class CartController extends Controller
     {
         if(Auth::user() == null){
             $status=false;
-            
+            return view('pages.cart', compact('status'));
         }else{
             $c_id=Auth::user()->C_id;
             // Eager load product relationship and filter by c_id
