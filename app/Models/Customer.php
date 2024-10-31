@@ -8,12 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Customer extends Authenticatable
 {
     use HasFactory;
-    
-    protected $table = 'customers';
-    protected $primaryKey = 'C_id';
-    protected $fillable = [
-        'C_name', 'C_password', 'C_email', 'C_Address'
-    ];
 
     protected $fillable = ['name', 'password', 'email'];
 
@@ -22,11 +16,7 @@ class Customer extends Authenticatable
         'remember_token',
     ];
 
-    // A customer can have many orders
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'C_id');
-    }
+    protected $primaryKey = 'C_id'; // Add this line to specify the custom primary key
 
     protected function casts(): array
     {

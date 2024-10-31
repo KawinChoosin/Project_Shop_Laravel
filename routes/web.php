@@ -12,21 +12,12 @@ use App\Http\Controllers\DiaryEntryController;
 // Home
 Route::get('/', [ProductController::class, 'getProductsByCategory'])->name('home');
 
-<<<<<<< HEAD
-// Services route
-Route::get('/favorites', function () {
-    return view('pages.fav'); 
-})->name('favorites');
-
-// Contact route
-=======
 // Profile Information
 Route::get('/profile', function () {
     return view('pages.profile'); 
 })->name('profile');
 
 // Cart
->>>>>>> origin/NN2
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/add-to-cart', [CartController::class, 'addToCart'])->name('cart.addToCart');
 Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
