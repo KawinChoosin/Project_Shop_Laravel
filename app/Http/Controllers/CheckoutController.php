@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\CartDetail;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -27,7 +28,7 @@ class CheckoutController extends Controller
         ]);
 
         // Temporarily hardcode C_id for testing
-        $customerId = 1; // Replace with an actual C_id from your database
+        $customerId =Auth::user()->C_id; // Replace with an actual C_id from your database
         
         // Save the new address or update existing
         $address = Address::updateOrCreate(
@@ -52,7 +53,7 @@ class CheckoutController extends Controller
         'coupon_key' => 'required|string',
     ]);
 
-    $customerId = 1; // Placeholder C_id for demo
+    $customerId =Auth::user()->C_id; // Placeholder C_id for demo
 
     // Retrieve customer addresses and cart items
     $addresses = Address::where('C_id', $customerId)->get();
@@ -95,7 +96,7 @@ class CheckoutController extends Controller
 
     public function placeOrder(Request $request)
     {
-        $customerId = 1; // Placeholder for the customer ID
+        $customerId =Auth::user()->C_id; // Placeholder for the customer ID
     
         // Step 1: Create a new order
         $order = Order::create([

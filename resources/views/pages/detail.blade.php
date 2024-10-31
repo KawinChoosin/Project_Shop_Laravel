@@ -7,10 +7,11 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-100">
-    @include('components.nav')
-
+    @if($status==true)
+        @include('components.nav')
+    
     @if($product)
-        <section class="flex justify-center items-stretch py-8 bg-gradient-to-bl from-blue-100 to-purple-100 min-h-[68vh]">
+        <section class="flex justify-center items-stretch py-8 bg-gradient-to-bl from-blue-100 to-purple-100 min-h-[78vh]">
             <!-- Image Section -->
             <div class="flex-1 flex justify-center items-center">
                 <img src="{{ $product->P_img }}" alt="{{ $product->P_name }}" class="max-w-[50%] rounded-md object-contain">
@@ -83,10 +84,62 @@
                 setQuantity(value <= maxQuantity ? value : maxQuantity);
             };
         </script>
+        <!-- Modal Structure -->
+<div id="success-modal" class="fixed inset-0 z-10 hidden w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5 10A10 10 0 118 4a10 10 0 0110 10z" />
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                        <h3 class="text-base font-semibold text-gray-900" id="modal-title">Add to Cart Successful</h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">The product has been added to your cart.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <button id="close-modal" type="button" class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+        // Show the modal
+        const modal = document.getElementById('success-modal');
+        modal.classList.remove('hidden');
+
+        // Hide the modal after 5 seconds
+        setTimeout(function() {
+            modal.classList.add('hidden');
+        }, 3000);
+    });
+
+    document.getElementById('close-modal').addEventListener('click', function() {
+        const modal = document.getElementById('success-modal');
+        modal.classList.add('hidden');
+    });
+</script>
+
+
     @else
         <p class="text-center text-gray-700">Product not found.</p>
     @endif
 
     @include('components.footer')
+        
+    @else
+        <script>
+            window.location.href = '/login'; // replace with your target URL
+        </script>
+    @endif
+    
 </body>
 </html>

@@ -32,6 +32,16 @@ Route::get('/ordersummary', function () {
     return view('pages.ordersummary'); 
 })->name('ordersummary');
 
+Route::get('/checkout', [AddressController::class, 'showAddresses'])->name('checkout');
+Route::get('/test-form', function () {
+    return view('test_form'); // This should point to the view you created
+})->name('test.form');
+Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply_coupon');   
+Route::post('/checkout/place-order', [CheckoutController::class, 'placeOrder'])->name('checkout.place_order');
+
+Route::get('/order-summary', [CheckoutController::class, 'orderSummary'])->name('order.summary');
+Route::get('/order/summary/{orderId}', [CheckoutController::class, 'orderSummary'])->name('order.summary');
+
 Route::post('/checkout/store-address', [AddressController::class, 'store'])->name('checkout.store_address');
 
 Route::get('/checkout', [AddressController::class, 'showAddresses'])->name('checkout');
@@ -59,5 +69,8 @@ Route::get('/checkout', [AddressController::class, 'showAddresses'])->name('chec
     });
     
     Route::post('/profile-photo', [UserController::class, 'updateProfilePhoto'])->name('profile-photo.update');
-    
+
     require __DIR__ . '/auth.php';
+    Route::get('/{P_id}', [ProductController::class, 'show'])->name('pages.detail');
+
+    
