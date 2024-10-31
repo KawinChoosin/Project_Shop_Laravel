@@ -11,9 +11,8 @@
     <section class="py-24 relative">
         <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
             <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">Profile</h2>
-
-            
-            <div class="font-normal text-xl leading-8 text-gray-500 mx-15">Username: {{ $customer->name }}</div>
+<div class="ml-4">
+<div class="font-normal text-xl leading-8 text-gray-500 mx-15">Username: {{ $customer->name }}</div>
             <div class="font-normal text-xl leading-8 text-gray-500 mx-15">Email: {{ $customer->email }}</div>
             
             <!-- Log Out Button -->
@@ -23,6 +22,8 @@
                     Log Out
                 </button>
             </form>
+</div>
+            
 
             <!-- Summary Section for Orders -->
             <div class="rounded-xl p-6 w-full mb-8 max-lg:max-w-xl max-lg:mx-auto">

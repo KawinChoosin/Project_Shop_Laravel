@@ -48,7 +48,8 @@
       <h2 class="text-xl font-semibold text-gray-900 " >Delivery Details</h2>
      
       
-        <h3 class="mb-4 block text-base font-semibold text-gray-900  ">Please select address</h3>
+        <h3 class="mb-4 block text-base font-semibold text-gray-900  ">Please select address (required *)</h3>
+        <form id="addressForm" onsubmit="update(event)">
         <select id="addresses" name="address_id" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" onchange="updateAddressId()">
             <option selected disabled>Select an address</option>
             @foreach($addresses as $address)
@@ -56,7 +57,15 @@
                     {{ $address->A_name }}, {{ $address->A_address_line1 }}, {{ $address->A_city }}, {{ $address->A_country }}, {{ $address->A_phone_number }}
                 </option>
             @endforeach
+            
         </select>
+        </form>
+        <!-- @if (session('status') === false && session('errors'))
+    <div class=" text-sm ml-4 text-red-600">
+        <p>address require</p>
+    </div>
+@endif -->
+
         <div class="flex items-center my-4">
             <hr class="flex-grow border-t border-gray-200">
             <span class="mx-4 text-gray-500">or</span>
@@ -188,7 +197,9 @@
         @csrf
         <input type="hidden" name="address_id" id="selectedAddressId">
         <input type="hidden" name="subTotal" value="{{ $total }}">
-
+       
+            
+     
         <button type="submit" class="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 font-semibold text-lg text-white hover:bg-primary-100 focus:outline-none focus:ring-4 focus:ring-primary-300">
           Place Order
         </button>
@@ -222,6 +233,32 @@
             console.log("Selected Address Text:", selectedAddressText);
         }
     </script>
+<script>
+function update(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Gather data from the form
+    const formData = new FormData(document.getElementById('addressForm'));
+    
+    // Optionally, use fetch or another AJAX method to send the data
+    fetch('/update-address', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle success (e.g., display a success message)
+        console.log(data);
+    })
+    .catch(error => {
+        // Handle error (e.g., display an error message)
+        console.error('Error:', error);
+    });
+}
+</script>
 
 </body>
 </html>

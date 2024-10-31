@@ -94,37 +94,48 @@ class CheckoutController extends Controller
     return view('pages.checkout', compact('addresses', 'subTotal', 'totalDeliveryCharge', 'total', 'couponValue','hasCouponApplied'));
 }
 
-    public function placeOrder(Request $request)
-    {
-        $customerId =Auth::user()->C_id; // Placeholder for the customer ID
-    
-        // Step 1: Create a new order
-        $order = Order::create([
-            'C_id' => $customerId,
-            'O_Date_time' => now(),
-            'O_Total' => $request->subTotal,
-            'O_Address' => $request->address_id,
-            'O_Description' => $request->description ?? '',
+public function placeOrder(Request $request)
+{
+    try {
+        // Validate the incoming request
+        $request->validate([
+            'address_id' => 'required|string|not_in:""', // Ensure address_id is not empty
+            'subTotal' => 'required|numeric|min:0', // Ensure subTotal is a valid number
         ]);
-        
-        // Step 2: Add all items from cart_details to order_details
-        $cartItems = CartDetail::where('c_id', $customerId)->get();
-
-        foreach ($cartItems as $cartItem) {
-            OrderDetail::create([
-                'O_id' => $order->id,
-                'P_id' => $cartItem->P_id,
-                'OD_quantity' => $cartItem->CA_quantity,
-                'OD_price' => $cartItem->product->P_price, // Assuming `P_price` is the price per item
-            ]);
-        }
-
-        // Step 3: Delete all items from cart_details
-        CartDetail::where('c_id', $customerId)->delete();
-    
-        // Redirect to order summary with order ID
-        return redirect()->route('order.summary', ['orderId' => $order->id])->with('success', 'Order placed successfully!');
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Redirect back with validation errors and status = false
+        return redirect()->back()->with(['status' => false, 'errors' => $e->validator->errors()])->withInput();
     }
+
+    $customerId = Auth::user()->C_id; // Placeholder for the customer ID
+
+    // Step 1: Create a new order
+    $order = Order::create([
+        'C_id' => $customerId,
+        'O_Date_time' => now(),
+        'O_Total' => $request->subTotal,
+        'O_Address' => $request->address_id,
+    ]);
+    
+    // Step 2: Add all items from cart_details to order_details
+    $cartItems = CartDetail::where('c_id', $customerId)->get();
+
+    foreach ($cartItems as $cartItem) {
+        OrderDetail::create([
+            'O_id' => $order->id,
+            'P_id' => $cartItem->P_id,
+            'OD_quantity' => $cartItem->CA_quantity,
+            'OD_price' => $cartItem->product->P_price, // Assuming `P_price` is the price per item
+        ]);
+    }
+
+    // Step 3: Delete all items from cart_details
+    CartDetail::where('c_id', $customerId)->delete();
+
+    // Redirect to order summary with order ID and status = true
+    return redirect()->route('order.summary', ['orderId' => $order->id])->with('success', 'Order placed successfully!')->with('status', true);
+}
+
     
 
     public function orderSummary($orderId)

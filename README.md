@@ -23,5 +23,9 @@
 ```
 
 ```
+./vendor/bin/sail artisan db:seed --class=CouponsTableSeeder
+```
+
+```
 ./vendor/bin/sail npm run dev
 ```
