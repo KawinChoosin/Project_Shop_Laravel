@@ -38,9 +38,9 @@ class CreateProductsAndCategoriesTables extends Migration
 
         Schema::create('customers', function (Blueprint $table) {
             $table->id('C_id');
-            $table->string('C_name', 255);
-            $table->string('C_password', 255);
-            $table->string('C_email', 255)->unique();
+            $table->string('name', 255);
+            $table->string('password', 255);
+            $table->string('email', 255)->unique();
             $table->foreignId('A_id')->nullable()->constrained('addresses', 'A_id')->onDelete('set null'); // Set the foreign key to A_id
             $table->timestamps();
         });

@@ -12,49 +12,60 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display the customer's profile form.
      */
     public function edit(Request $request): View
     {
         return view('profile.edit', [
-            'user' => $request->user(),
+            'customer' => $request->customer(),
         ]);
     }
 
     /**
-     * Update the user's profile information.
+     * Update the customer's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $request->customer()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($request->customer()->isDirty('email')) {
+            $request->customer()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $request->customer()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**
-     * Delete the user's account.
+     * Delete the customer's account.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
+        $request->validateWithBag('customerDeletion', [
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $customer = $request->customer();
 
         Auth::logout();
 
-        $user->delete();
+        $customer->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
     }
+    // public function showProfile()
+    // {
+    //     $customer = Auth::customer();
+        
+    //     // Retrieve the customer's orders with their associated items
+    //     $orders = Order::with('orderDetails.product')
+    //         ->where('customer_id', $customer->id)
+    //         ->get();
+
+    //     return view('profile', compact('customer', 'orders'));
+    // }
 }
