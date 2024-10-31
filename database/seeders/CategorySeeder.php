@@ -36,7 +36,7 @@ class CategorySeeder extends Seeder
                 'P_quantity' => 10,
                 'P_price' => 25,
                 'CG_id' => 1,
-                'P_img' => 'https://media.istockphoto.com/id/610241662/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%9F%E0%B8%B8%E0%B8%95%E0%B8%9A%E0%B8%AD%E0%B8%A5%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%81%E0%B8%A2%E0%B8%81%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%9A%E0%B8%99%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%AA%E0%B8%B5%E0%B8%82%E0%B8%B2%E0%B8%A7.jpg?s=612x612&w=0&k=20&c=qc1fpQoQjlyeXj73w3gWtRMpL0i6AX9T_4pNmx7rduc',
+                'P_img' => 'https://th.bing.com/th/id/R.2d77bfb399b7324beb3ac6c9debe3df8?rik=4VW7P1t7M%2b%2foEQ&pid=ImgRaw&r=0',
             ],
             [
                 'P_name' => 'Tennis Racket',

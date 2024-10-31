@@ -53,6 +53,14 @@ class ProductController extends Controller
         return view('home', compact('products', 'categoryName'));
     }
 
-    
+    public function show($id, Request $request)
+    {
+        // Fetch product details
+        $product = Product::find($id);
+        
+        $customerId = $request->user()->id ?? 1; // Example customer_id
+
+        return view('pages.detail', compact('product'));
+    }
     
 }
