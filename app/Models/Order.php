@@ -20,6 +20,10 @@ class Order extends Model
         'updated_at',    // Timestamp for updates
     ];
 
+    protected $casts = [
+        'O_Total' => 'double',
+    ];
+
     // Define relationships
     public function orderDetails()
     {

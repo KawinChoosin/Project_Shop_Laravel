@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,15 +58,14 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-    // public function showProfile()
-    // {
-    //     $customer = Auth::customer();
-        
-    //     // Retrieve the customer's orders with their associated items
-    //     $orders = Order::with('orderDetails.product')
-    //         ->where('customer_id', $customer->id)
-    //         ->get();
+    public function showProfile()
+{
+    $customer = Auth::user();
+    // Eager load orders with their order details and products
+    $orders = $customer->orders()->with(['orderDetails.product'])->get(); 
 
-    //     return view('profile', compact('customer', 'orders'));
-    // }
+    return view('pages.profile', compact('customer', 'orders'));
+}
+
+    
 }

@@ -52,6 +52,7 @@
                         <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
                             $<span id="total-price-{{ $item->CA_id }}">{{ number_format($item->OD_quantity * $item->OD_price, 2) }}</span>
                         </h6>
+
                     </div>
                 </div>
             @endforeach

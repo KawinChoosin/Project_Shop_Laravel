@@ -30,6 +30,9 @@ class Customer extends Authenticatable
     {
         return $this->hasMany(Address::class, 'C_id');
     }
-    
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'C_id'); // Assuming O_id is the foreign key in OrderDetail
+    }
 }
 
