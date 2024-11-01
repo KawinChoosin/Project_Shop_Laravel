@@ -26,14 +26,6 @@ class CartDetailsSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'C_id' => 2, // Another cart
-                'P_id' => 4, // Product ID (e.g., T-Shirt)
-                'CA_quantity' => 5,
-                'CA_price' => 75, // 5 * 15
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
         ];
 
         // Insert cart details data into the cart_details table

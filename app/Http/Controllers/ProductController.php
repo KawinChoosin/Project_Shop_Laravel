@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -53,6 +54,18 @@ class ProductController extends Controller
         return view('home', compact('products', 'categoryName'));
     }
 
-    
+    public function show($id, Request $request)
+    {
+        // Fetch product details
+        $product = Product::find($id);
+        if(Auth::user() == null){
+            $status=false;
+        }else{
+            $status=true;
+        }
+        // Example customer_id
+        
+        return view('pages.detail', compact('product','status'));
+    }
     
 }

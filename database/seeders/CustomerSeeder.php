@@ -12,17 +12,17 @@ class CustomerSeeder extends Seeder
         // Insert some dummy customers
         $customers = [
             [
-                'C_name' => 'John Doe',
-                'C_password' => bcrypt('password'), // Hash the password
-                'C_email' => 'john@example.com',
+                'name' => 'John Doe',
+                'password' => bcrypt('password'), // Hash the password
+                'email' => 'john@example.com',
        
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'C_name' => 'Jane Smith',
-                'C_password' => bcrypt('password'), // Hash the password
-                'C_email' => 'jane@example.com',
+                'name' => 'Jane Smith',
+                'password' => bcrypt('password'), // Hash the password
+                'email' => 'jane@example.com',
             
                 'created_at' => now(),
                 'updated_at' => now(),

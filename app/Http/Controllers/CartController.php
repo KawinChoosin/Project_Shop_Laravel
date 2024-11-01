@@ -5,31 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\CartDetail;
+use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator; // For validating requests
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     public function showCart()
-{
-    $c_id=1;
-    // Eager load product relationship and filter by c_id
-    $cartItems = CartDetail::with('product')
-                  ->where('c_id', $c_id) // Filter by c_id
-                  ->get();
-
-    // Calculate subtotal by multiplying price and quantity from cart details
-    $subTotal = $cartItems->sum(function ($item) {
-        return $item->product->P_price * $item->CA_quantity;
-    });
-
-    // Total delivery charge (can be static or calculated separately)
-    $totalDeliveryCharge = 50;
-
-    // Total cart value
-    $total = $subTotal + $totalDeliveryCharge;
-
-    // Pass data to the view
-    return view('pages.cart', compact('cartItems', 'subTotal', 'totalDeliveryCharge', 'total'));
-}
+    {
+        if(Auth::user() == null){
+            $status=false;
+            return view('pages.cart', compact('status'));
+        }else{
+            $c_id=Auth::user()->C_id;
+            // Eager load product relationship and filter by c_id
+            $cartItems = CartDetail::with('product')
+                        ->where('c_id', $c_id) // Filter by c_id
+                        ->get();
+    
+            // Calculate subtotal by multiplying price and quantity from cart details
+            $subTotal = $cartItems->sum(function ($item) {
+                return $item->product->P_price * $item->CA_quantity;
+            });
+    
+            // Total delivery charge (can be static or calculated separately)
+            $totalDeliveryCharge = 50;
+    
+            // Total cart value
+            $total = $subTotal + $totalDeliveryCharge;
+            $status=true;
+            return view('pages.cart', compact('cartItems', 'subTotal', 'totalDeliveryCharge', 'total', 'status'));
+        }
+      
+        // dd($cartItems, $subTotal, $totalDeliveryCharge, $total);
+        // Pass data to the view
+   
+    }
 
     public function updateQuantity(Request $request)
     {
@@ -68,12 +80,13 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        $customerId = $request->user()->id ?? 1;  // รับ customer id
+        
+        $customerId = $request->user()->id ?? Auth::user()->C_id;  // รับ customer id
         $productId = $request->input('P_id') ?? $request->route('P_id');
         $quantity = $request->input('quantity');
 
         $product = Product::find($productId);
-        dd($product);
+        // dd($product);
         if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
         }
@@ -116,12 +129,6 @@ class CartController extends Controller
         $totalPrice = $cartItems->sum('CA_price');
     
         // ส่ง JSON กลับไปยัง frontend
-        return response()->json([
-            'message' => 'Product added/updated successfully',
-            'cartItems' => $cartItems,
-            'totalPrice' => $totalPrice
-        ]);
+        return response()->nocontent();
     }
-
-
 }

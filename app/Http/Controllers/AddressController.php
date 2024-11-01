@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Address;
 use App\Models\Product;
 use App\Models\CartDetail;
+use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
@@ -24,7 +25,7 @@ class AddressController extends Controller
     ]);
    
     // Set default C_id for demonstration (you might want to get this from the session or user)
-    $validatedData['C_id'] = 1; 
+    $validatedData['C_id'] =Auth::user()->C_id;; 
 
     // Attempt to create a new address record
     $address = Address::create($validatedData);
@@ -36,7 +37,7 @@ class AddressController extends Controller
 
     public function showAddresses()
 {
-    $customerId = 1; // Placeholder C_id for demo
+    $customerId =Auth::user()->C_id;; // Placeholder C_id for demo
     $addresses = Address::where('C_id', $customerId)->get();
     $cartItems = CartDetail::with('product')
                       ->where('c_id', $customerId) // Filter by c_id

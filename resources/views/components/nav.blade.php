@@ -31,7 +31,7 @@
       </a>
 
       <!-- User Icon -->
-      <a href="{{ url('/profile') }}" class="text-gray-700 hover:text-gray-900">
+      <a href="{{ route('profile') }}" class="text-gray-700 hover:text-gray-900">
         <span class="sr-only">User Profile</span>
         <svg
               xmlns="http://www.w3.org/2000/svg"

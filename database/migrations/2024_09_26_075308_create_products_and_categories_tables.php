@@ -9,13 +9,11 @@ class CreateProductsAndCategoriesTables extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id('A_id');
-           
             $table->string('A_address_line1', 255);
             $table->string('A_city', 100);
             $table->string('A_state', 100);
-            $table->string('A_postal_code', 20);
+            $table->integer('A_postal_code');
             $table->string('A_country', 100);
-            $table->boolean('A_is_default')->default(false); // Default address flag
             $table->timestamps();
         });
 
@@ -38,10 +36,9 @@ class CreateProductsAndCategoriesTables extends Migration
 
         Schema::create('customers', function (Blueprint $table) {
             $table->id('C_id');
-            $table->string('C_name', 255);
-            $table->string('C_password', 255);
-            $table->string('C_email', 255)->unique();
-            $table->foreignId('A_id')->nullable()->constrained('addresses', 'A_id')->onDelete('set null'); // Set the foreign key to A_id
+            $table->string('name', 255);
+            $table->string('password', 255);
+            $table->string('email', 255)->unique();
             $table->timestamps();
         });
 
@@ -53,7 +50,6 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->timestamp('O_Date_time', 3);
             $table->decimal('O_Total', 65, 30);
             $table->string('O_Address', 255)->nullable();
-            $table->text('O_Description')->nullable();
             $table->timestamps();
         });
 
@@ -93,7 +89,6 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->decimal('CA_price', 65, 30);
             $table->timestamps();
         });
-        
     }
 
     public function down()
@@ -106,6 +101,5 @@ class CreateProductsAndCategoriesTables extends Migration
         Schema::dropIfExists('payments');
         Schema::dropIfExists('cart_details');
         Schema::dropIfExists('addresses');
-        
     }
 }
