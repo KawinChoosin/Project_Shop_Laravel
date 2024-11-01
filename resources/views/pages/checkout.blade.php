@@ -96,8 +96,10 @@
         </div>
 
         <div>
-            <label for="A_postal_code" class="mb-2 block text-sm font-medium text-gray-900">Postal code</label>
-            <input type="text" id="A_postal_code" name="A_postal_code" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="Postal Code" required>
+            <label for="A_postal_code" class="mb-2 block text-sm font-medium text-gray-900">Postal code(number)</label>
+            <input type="text" id="A_postal_code" name="A_postal_code" 
+                   class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" 
+                   placeholder="Postal Code" required pattern="\d+" inputmode="numeric">
         </div>
 
         <div>
@@ -106,8 +108,10 @@
         </div>
 
         <div>
-            <label for="A_phone_number" class="mb-2 block text-sm font-medium text-gray-900">Phone Number</label>
-            <input type="tel" id="A_phone_number" name="A_phone_number" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900" placeholder="Your Phone Number" required>
+            <label for="A_phone_number" class="mb-2 block text-sm font-medium text-gray-900">Phone Number(number)</label>
+            <input type="tel" id="A_phone_number" name="A_phone_number" 
+                   class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900" 
+                   placeholder="Your Phone Number" required pattern="\d+" inputmode="numeric">
         </div>
 
         <div class="sm:col-span-2">

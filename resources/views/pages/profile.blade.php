@@ -55,18 +55,26 @@
                             <h4 class="font-semibold text-lg">Items:</h4>
                             @foreach($order->orderDetails as $detail)
                                 <div class="order-detail-item py-2 px-4 bg-white rounded mb-2">
-                                    <div>
-                                        <span class="font-semibold">Product:</span> {{ $detail->product->P_name }}
-                                    </div>
-                                    <div>
-                                        <img src="{{ asset($detail->product->P_img) }}" alt="{{ $detail->product->P_name }}" class="w-20 h-20 object-cover rounded">
-                                    </div>
-                                    <div>
-                                        <span class="font-semibold">Quantity:</span> {{ $detail->OD_quantity }}
-                                    </div>
-                                    <div>
-                                        <span class="font-semibold">Price per Item:</span> ${{ number_format($detail->OD_price, 2) }}
-                                    </div>
+                                <div class="flex items-start space-x-4 p-6">
+    <!-- Product Image on the Left -->
+    <div>
+        <img src="{{ asset($detail->product->P_img) }}" alt="{{ $detail->product->P_name }}" class="w-20 h-20 object-cover rounded">
+    </div>
+
+    <!-- Product Details on the Right -->
+    <div class="flex flex-col space-y-2 ">
+        <div>
+            <span class="font-semibold">Product:</span> {{ $detail->product->P_name }}
+        </div>
+        <div>
+            <span class="font-semibold">Quantity:</span> {{ $detail->OD_quantity }}
+        </div>
+        <div>
+            <span class="font-semibold">Price per Item:</span> ${{ number_format($detail->OD_price, 2) }}
+        </div>
+    </div>
+</div>
+
                                 </div>
                             @endforeach
                         </div>

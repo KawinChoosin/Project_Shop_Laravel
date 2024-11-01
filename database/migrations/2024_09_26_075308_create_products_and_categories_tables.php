@@ -12,7 +12,7 @@ class CreateProductsAndCategoriesTables extends Migration
             $table->string('A_address_line1', 255);
             $table->string('A_city', 100);
             $table->string('A_state', 100);
-            $table->string('A_postal_code', 20);
+            $table->integer('A_postal_code');
             $table->string('A_country', 100);
             $table->timestamps();
         });
