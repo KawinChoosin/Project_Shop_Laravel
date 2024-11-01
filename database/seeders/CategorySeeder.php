@@ -45,6 +45,7 @@ class CategorySeeder extends Seeder
                 'P_price' => 75,
                 'CG_id' => 1,
                 'P_img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHOCBcsDToYJSe4n7bn7deIO16auJqluxpSg&s',
+
             ],
             [
                 'P_name' => 'Basketball',
